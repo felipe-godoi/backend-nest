@@ -5,8 +5,8 @@ export class Measurement {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: "number", nullable: false })
-    idDispositivo: number;
+    @Column({ name: "id-dispositivo", type: "varchar", nullable: false })
+    idDispositivo: string;
 
     @Column("datetime")
     timestamp: Date;

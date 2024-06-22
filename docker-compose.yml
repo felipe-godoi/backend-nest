@@ -20,7 +20,8 @@ services:
         volumes:
             - .:/usr/src/app
         depends_on:
-            - database
+            database: 
+                condition: service_healthy
 
     database:
         container_name: db
@@ -37,6 +38,13 @@ services:
             - db_data:/var/lib/mysql
         environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+            MYSQL_DATABASE: ${DATABASE_NAME}
+        healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+            start_period: 5s
+            interval: 5s
+            timeout: 10s
+            retries: 10
 
 volumes:
     db_data:

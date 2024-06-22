@@ -17,7 +17,16 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "typeorm": "ts-node ./node_modules/typeorm/cli",
+    "typeorm:sync": "npm run typeorm -- -d ./src/shared/config/typeorm.ts schema:sync",
+    "typeorm:drop": "npm run typeorm -- -d ./src/shared/config/typeorm.ts schema:drop",
+    "typeorm:reset": "npm run typeorm:drop && npm run typeorm:sync",
+    "migration:run": "npm run typeorm migration:run -- -d ./src/shared/config/typeorm.ts",
+    "migration:generate": "npm run typeorm -- -d ./src/shared/config/typeorm.ts migration:generate ./migrations/migration",
+    "migration:create": "npm run typeorm -- migration:create ./migrations/migration",
+    "migration:revert": "npm run typeorm -- -d ./src/shared/config/typeorm.ts migration:revert",
+    "seed": "ts-node ./src/shared/config/seed.ts" 
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
@@ -28,7 +37,8 @@
     "mysql2": "^3.10.1",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
-    "typeorm": "^0.3.20"
+    "typeorm": "^0.3.20",
+    "typeorm-extension": "^3.5.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
