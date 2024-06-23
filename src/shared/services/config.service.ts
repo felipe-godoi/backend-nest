@@ -1,38 +1,49 @@
+import * as env from "dotenv";
 import "reflect-metadata";
-import * as env from 'dotenv'
-import { Measurement } from '../entities/measurement.entity'
 import { DataSourceOptions } from "typeorm";
 import { SeederOptions } from "typeorm-extension";
+import { Measurement } from "../entities/measurement.entity";
 
-env.config()
+env.config();
 
 export class ConfigService {
     public getEnv(key: string): any {
-        return process.env[key]
+        return process.env[key];
     }
 
-    public getTypeOrmConfig(): DataSourceOptions {        
+    public getTypeOrmConfig(): DataSourceOptions {
         return {
-            type: 'mysql',
-            host: this.getEnv('DATABASE_HOST'),
-            database: this.getEnv('DATABASE_NAME'),
-            username: this.getEnv('DATABASE_USERNAME'),
-            password: this.getEnv('DATABASE_PASSWORD'),
-            port: Number(this.getEnv('DATABASE_EXTERNAL_PORT')),
+            type: "mysql",
+            host: this.getEnv("DATABASE_HOST"),
+            database: this.getEnv("DATABASE_NAME"),
+            username: this.getEnv("DATABASE_USERNAME"),
+            password: this.getEnv("DATABASE_PASSWORD"),
+            port: Number(this.getEnv("DATABASE_EXTERNAL_PORT")),
             synchronize: false,
             ssl: false,
             entities: [Measurement],
-            migrations: ['dist/migrations/*-migration.js'],
-            migrationsTableName: "migrations"
-        }
+            migrations: ["dist/migrations/*-migration.js"],
+            migrationsTableName: "migrations",
+        };
     }
 
     public getTypeOrmSeedConfig(): DataSourceOptions & SeederOptions {
         return {
             ...this.getTypeOrmConfig(),
-            seeds: ["seeds/**/*{.ts,.js}"]
-        }
+            seeds: ["seeds/**/*{.ts,.js}"],
+        };
+    }
+
+    public getTypeOrmTestConfig(): DataSourceOptions {
+        return {
+            type: "sqlite",
+            database: ":memory:",
+            dropSchema: true,
+            entities: [Measurement],
+            synchronize: true,
+            logging: false,
+        };
     }
 }
 
-export const configService = new ConfigService()
+export const configService = new ConfigService();
