@@ -24,6 +24,7 @@ export class ConfigService {
             entities: [Measurement],
             migrations: ["dist/migrations/*-migration.js"],
             migrationsTableName: "migrations",
+            timezone: "Z",
         };
     }
 
@@ -36,12 +37,16 @@ export class ConfigService {
 
     public getTypeOrmTestConfig(): DataSourceOptions {
         return {
-            type: "sqlite",
-            database: ":memory:",
-            dropSchema: true,
-            entities: [Measurement],
+            type: "mysql",
+            host: this.getEnv("DATABASE_EXTERNAL_HOST"),
+            database: this.getEnv("DATABASE_TEST_NAME"),
+            username: this.getEnv("DATABASE_USERNAME"),
+            password: this.getEnv("DATABASE_PASSWORD"),
+            port: Number(this.getEnv("DATABASE_EXTERNAL_PORT")),
             synchronize: true,
-            logging: false,
+            ssl: false,
+            entities: [Measurement],
+            timezone: "Z",
         };
     }
 }

@@ -1,5 +1,4 @@
 import { Injectable } from "@nestjs/common";
-import { format } from "date-fns";
 import { DataSource, Repository } from "typeorm";
 import { Measurement } from "../entities/measurement.entity";
 
@@ -46,9 +45,9 @@ export class MeasurementRepository extends Repository<Measurement> {
 
         return {
             measurements: measurements.map((m) => ({
-                date: format(m.date, "yyyy-MM-dd HH:mm:ss"),
-                accumulatedEnergy: m.accumulatedEnergy,
-                accumulatedPower: m.accumulatedPower,
+                date: m.date,
+                accumulatedEnergy: Number(m.accumulatedEnergy),
+                accumulatedPower: Number(m.accumulatedPower),
             })),
         };
     }
@@ -77,7 +76,7 @@ export class MeasurementRepository extends Repository<Measurement> {
 
         return {
             measurements: measurements.map((m) => ({
-                date: format(m.date, "yyyy-MM-dd HH:mm:ss"),
+                date: m.date,
                 accumulatedEnergy: m.accumulatedEnergy,
                 accumulatedPower: m.accumulatedPower,
             })),
@@ -104,7 +103,7 @@ export class MeasurementRepository extends Repository<Measurement> {
 
         return {
             measurements: measurements.map((m) => ({
-                date: format(m.date, "yyyy-MM-dd HH:mm:ss"),
+                date: m.date,
                 activeEnergy: m.activeEnergy,
                 activePower: m.activePower,
             })),

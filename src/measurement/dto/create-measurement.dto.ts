@@ -1,4 +1,5 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { Transform } from "class-transformer";
+import { IsISO8601, IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateMeasurementDto {
     @IsString()
@@ -6,7 +7,8 @@ export class CreateMeasurementDto {
     idDispositivo: string;
 
     @IsNotEmpty()
-    @IsDateString()
+    @IsISO8601()
+    @Transform(({ value }) => new Date(value).toISOString())
     timestamp: string;
 
     @IsNotEmpty()

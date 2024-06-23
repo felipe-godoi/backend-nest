@@ -6,7 +6,7 @@
    "editor.tabSize": 4,
    "editor.detectIndentation": false,
    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true,
-      "source.organizeImports": "always"
-   }
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "always"
+}
 }

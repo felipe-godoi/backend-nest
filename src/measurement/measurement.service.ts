@@ -46,8 +46,8 @@ export class MeasurementService {
     }
 
     async saveMeasurements(
-        measurement: CreateMeasurementDto[]
+        measurements: CreateMeasurementDto[]
     ): Promise<Measurement[]> {
-        return await this.measurementRepository.save(measurement);
+        return await this.measurementRepository.save(measurements);
     }
 }

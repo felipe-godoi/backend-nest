@@ -44,7 +44,7 @@ export class MeasurementController {
      * @returns medições salvas
      */
     @Post("measurements")
-    saveMeasurement(@Body() measurement: CreateMeasurementDto[]) {
-        return this.measurementService.saveMeasurements(measurement);
+    saveMeasurement(@Body() measurements: CreateMeasurementDto[]) {
+        return this.measurementService.saveMeasurements(measurements);
     }
 }
