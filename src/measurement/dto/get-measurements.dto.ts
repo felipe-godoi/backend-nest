@@ -32,7 +32,7 @@ export class GetMeasurementsQueryDto {
     resolution: Resolution;
 
     @ApiProperty({
-        example: "2024-01-01 00:00:00+00",
+        example: "2022-06-01 00:00:00+00",
         required: true,
         description: "Data de início da consulta",
     })
@@ -42,7 +42,7 @@ export class GetMeasurementsQueryDto {
     startDate: string;
 
     @ApiProperty({
-        example: "2024-01-01 23:59:59+00",
+        example: "2022-06-01 23:59:59+00",
         required: true,
         description: "Data de fim da consulta",
     })
