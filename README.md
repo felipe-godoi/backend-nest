@@ -7,8 +7,9 @@ Ter o [docker](https://www.docker.com/) instalado.
 Para executar basta seguir os seguintes passos:
 
 #### 1. Clonar esse repositório;
-#### 2. Adicionar as variáveis de ambiente (podem ser adicionadas seguindo o modelo em [.env.example](.env.example)) 
-#### 3. Executar `docker compose up` em um terminal dentro da pasta do repositório.
+#### 2. Rodar `npm install`;
+#### 3. Adicionar as variáveis de ambiente (podem ser adicionadas seguindo o modelo em [.env.example](.env.example)) 
+#### 4. Executar `docker compose up` em um terminal dentro da pasta do repositório.
 
 # Como executar os testes:
 
