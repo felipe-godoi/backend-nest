@@ -16,7 +16,7 @@ services:
           memory: 2048M
     restart: unless-stopped
     ports:
-      - '3000:3000'
+      - '${APPLICATION_PORT}:3000'
     volumes:
       - .:/usr/src/app
     depends_on:
