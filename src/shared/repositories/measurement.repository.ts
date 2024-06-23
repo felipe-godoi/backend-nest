@@ -77,8 +77,8 @@ export class MeasurementRepository extends Repository<Measurement> {
         return {
             measurements: measurements.map((m) => ({
                 date: m.date,
-                accumulatedEnergy: m.accumulatedEnergy,
-                accumulatedPower: m.accumulatedPower,
+                accumulatedEnergy: Number(m.accumulatedEnergy),
+                accumulatedPower: Number(m.accumulatedPower),
             })),
         };
     }
@@ -104,8 +104,8 @@ export class MeasurementRepository extends Repository<Measurement> {
         return {
             measurements: measurements.map((m) => ({
                 date: m.date,
-                activeEnergy: m.activeEnergy,
-                activePower: m.activePower,
+                activeEnergy: Number(m.activeEnergy),
+                activePower: Number(m.activePower),
             })),
         };
     }

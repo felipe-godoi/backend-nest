@@ -44,6 +44,7 @@ export class ConfigService {
             password: this.getEnv("DATABASE_PASSWORD"),
             port: Number(this.getEnv("DATABASE_EXTERNAL_PORT")),
             synchronize: true,
+            dropSchema: true,
             ssl: false,
             entities: [Measurement],
             timezone: "Z",

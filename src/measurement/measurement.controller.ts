@@ -1,12 +1,16 @@
 import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
+import { ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { Measurement } from "../shared/entities/measurement.entity";
 import { Resolution } from "../shared/enums/resolution.enum";
 import { CreateMeasurementDto } from "./dto/create-measurement.dto";
 import {
     GetMeasurementsParamsDto,
     GetMeasurementsQueryDto,
+    MeasurementsOutputDto,
 } from "./dto/get-measurements.dto";
 import { MeasurementService } from "./measurement.service";
 
+@ApiTags("measurements")
 @Controller()
 export class MeasurementController {
     constructor(private readonly measurementService: MeasurementService) {}
@@ -23,6 +27,13 @@ export class MeasurementController {
      * @returns medições do dispositivo
      */
     @Get("device/:deviceId/measurements")
+    @ApiResponse({
+        status: 200,
+        description: "Medições retornadas com sucesso",
+        type: MeasurementsOutputDto,
+    })
+    @ApiResponse({ status: 400, description: "Erro ao buscar medições" })
+    @ApiResponse({ status: 500, description: "Erro interno" })
     findMeasurements(
         @Param() params: GetMeasurementsParamsDto,
         @Query() query: GetMeasurementsQueryDto
@@ -44,6 +55,17 @@ export class MeasurementController {
      * @returns medições salvas
      */
     @Post("measurements")
+    @ApiResponse({
+        status: 201,
+        description: "Medições salvas com sucesso",
+        type: [Measurement],
+    })
+    @ApiResponse({ status: 400, description: "Erro ao salvar medições" })
+    @ApiResponse({ status: 500, description: "Erro interno" })
+    @ApiBody({
+        type: [CreateMeasurementDto],
+        description: "Lista de medições a serem salvas",
+    })
     saveMeasurement(@Body() measurements: CreateMeasurementDto[]) {
         return this.measurementService.saveMeasurements(measurements);
     }
